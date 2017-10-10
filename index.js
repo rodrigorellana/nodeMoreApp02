@@ -28,7 +28,7 @@ client.get(destiny, null, null, function (error, data, res) {
 
   // customers.forEach(function(customer) {
   //   console.log(customer);
-  // });
+  // });  FROM I9
 });
 
 
