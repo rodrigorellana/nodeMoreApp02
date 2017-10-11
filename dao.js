@@ -21,10 +21,6 @@ module.exports = function (client) {
         var customers = JSON.parse(data);
         console.log("The data are:");
         console.log(customers);
-    
-        // customers.forEach(function(customer) {
-        //   console.log(customer);
-        // });
     });
     
     
@@ -36,18 +32,10 @@ module.exports = function (client) {
             console.log(error);
             return;
         }
-    
-        //Print the result
-        //   var customers = JSON.parse(data);
+  
         console.log("The data are:");
         console.log(data);
-    
-        // customers.forEach(function(customer) {
-        //   console.log(customer);
-        // });
     });
-    
-    
     
     function prepareClient(config) {
         var hash = makeHash(config.salt, config.password);

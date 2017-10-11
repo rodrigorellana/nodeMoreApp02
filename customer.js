@@ -1,17 +1,30 @@
 'use strict';
-var getOne
+var dao = require('./dao');
 
-var Customer = function () {
-    var self = this;    
-    var results = {};
-    var apiClient = {};
+var Customer = function() {
+    var self = this;
+    self.results = {};
+    self.apiClient = {};
+    self.apiURL = +'/customers/';
+    // self.apiURL = + '/customers/' + cumtomerID + '/users';
 
-    self.getOne = function (idCustomar) { 
-        self.idCustomar = idCustomar;
-        return new Promise(function (resolve, reject) {            
-            workflowSettingsModel
-                .findOne({ _id: idWorkflowSettings })
-                .exec(function (error, data) {
+    self.getAll = function(cumtomerID) {
+        return new Promise(function(resolve, reject) {
+            dao.get(self.apiURL).exec(function(error, data) {
+                if (error)
+                    reject(error);
+                else
+                    resolve(data);
+            });
+        });
+    };
+
+    self.getOne = function(cumtomerID) {
+        self.cumtomerID = cumtomerID;
+
+        return new Promise(function(resolve, reject) {
+            dao.get({ _id: idWorkflowSettings })
+                .exec(function(error, data) {
                     if (error)
                         reject(error);
                     else
@@ -20,8 +33,12 @@ var Customer = function () {
         });
     };
 
+    self.createUser = function(newUserEmail) {
+
+    }
+
     //doing
-    self.getRolesFromStage = function (stageIndex) {
+    self.getRolesFromStage = function(stageIndex) {
         // this function is open to type it from user interface, then must return email
         // comma separated values from all users from the rol calls from typing user
         // interface: getRolesFromStage('0','all') getRolesFromStage('2','Bodegueros')
@@ -29,7 +46,7 @@ var Customer = function () {
         // rol;
         self
             .getWfSettings(self.idWorkflowSettings)
-            .then(function (data) {
+            .then(function(data) {
                 var wf = data; //preguntar a marcelo como efectuar querys en mongoose
                 var targetStage = wf.stages[stageIndex];
                 if (!targetStage)
@@ -40,12 +57,11 @@ var Customer = function () {
 
                 // targetStage.roles.forEach(function(passingRole) { }, this);
 
-            }
-            ).catch(function (errorMsg) {
+            }).catch(function(errorMsg) {
                 let erroObj = self.createReturnObject(false, errorMsg, null, null);
                 return erroObj;
             });
-    };  
+    };
 
 };
 
