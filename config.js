@@ -10,5 +10,5 @@ module.exports = {
 
   //The credentials for the partner account
   consumerKey : 'rodrigo.orellana.1982@gmail.com',
-  password : 'toroloco123'
+  password : 'ffffffffff'
 };
